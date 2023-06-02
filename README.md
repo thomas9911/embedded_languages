@@ -13,6 +13,8 @@ roblox lua syntax.
 
 Implemented using `Deno`, which uses v8 under the hood
 
+**Maybe look into quickjs**
+
 ### Python
 
 Not exactly python but close, `Starlark`
