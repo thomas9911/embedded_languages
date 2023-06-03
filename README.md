@@ -19,3 +19,7 @@ Two implementations:
 ### Python
 
 Not exactly python but close, `Starlark`
+
+### [Rhai](https://github.com/rhaiscript/rhai)
+
+Embeddable en extensible scripting language made in Rust

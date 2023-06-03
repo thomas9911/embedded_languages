@@ -12,6 +12,7 @@ deno_runtime = "0.115.0"
 log = "*"
 mlua = { version = "0.8", features = ["luau", "vendored"] }
 pretty_env_logger = "*"
+rhai = { version = "1.14.0", features = ["serde"] }
 rquickjs = "0.1.7"
 serde_json = "1.0.96"
 # starlark = "0.8.0"
