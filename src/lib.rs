@@ -2,6 +2,7 @@ use log::LevelFilter;
 
 pub mod deno;
 pub mod lua;
+pub mod quickjs;
 pub mod starlark;
 
 pub fn init_logger() {
