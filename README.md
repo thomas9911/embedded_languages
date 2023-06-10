@@ -11,10 +11,11 @@ roblox lua syntax.
 
 ### Javascript
 
-Two implementations:
+Three implementations:
 
 - `Deno`, which uses v8 under the hood
 - `quickjs`, which uses its own engine.
+- `boa`, which uses its own engine written in Rust.
 
 ### Python
 

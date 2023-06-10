@@ -7,8 +7,11 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0.71"
+boa_engine = "0.16.0"
+boa_gc = "0.16.0"
 deno_core = "*"
 deno_runtime = "0.115.0"
+gc = "0.4.1"
 log = "*"
 mlua = { version = "0.8", features = ["luau", "vendored"] }
 pretty_env_logger = "*"
