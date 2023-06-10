@@ -52,8 +52,8 @@ impl Class for Console {
 
     const LENGTH: usize = 0;
 
-    fn constructor(_this: &JsValue, _args: &[JsValue], _context: &mut Context) -> JsResult<Self> {
-        Ok(Console)
+    fn constructor(_this: &JsValue, _args: &[JsValue], context: &mut Context) -> JsResult<Self> {
+        Err(context.construct_type_error("console is not a constructor"))
     }
 
     /// This is where the object is initialized.
