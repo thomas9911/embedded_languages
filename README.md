@@ -13,9 +13,10 @@ roblox lua syntax.
 
 Three implementations:
 
-- `Deno`, which uses v8 under the hood
+- `Deno`, which uses `v8` under the hood
 - `quickjs`, which uses its own engine.
 - `boa`, which uses its own engine written in Rust.
+- `rusty_jsc` which uses the `javascriptcore` engine
 
 ### Python
 

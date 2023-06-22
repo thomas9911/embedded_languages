@@ -2,6 +2,7 @@ use log::LevelFilter;
 
 pub mod boa;
 pub mod deno;
+pub mod javascriptcore;
 pub mod lua;
 pub mod quickjs;
 pub mod rhai;

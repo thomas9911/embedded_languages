@@ -12,6 +12,7 @@ boa_gc = "0.16.0"
 deno_core = "*"
 deno_runtime = "0.115.0"
 gc = "0.4.1"
+rusty_jsc = "0.1.0"
 log = "*"
 mlua = { version = "0.8", features = ["luau", "vendored"] }
 pretty_env_logger = "*"
