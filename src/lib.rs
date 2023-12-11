@@ -1,7 +1,8 @@
 use log::LevelFilter;
 
 pub mod boa;
-pub mod deno;
+// pub mod deno;
+#[cfg(target_os = "linux")]
 pub mod javascriptcore;
 pub mod lua;
 pub mod quickjs;

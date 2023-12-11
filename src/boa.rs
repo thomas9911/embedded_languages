@@ -1,7 +1,9 @@
 use boa_engine::class::{Class, ClassBuilder};
-use boa_engine::JsResult;
+use boa_engine::{JsResult, JsNativeError};
 use boa_engine::{Context, JsValue};
 use boa_gc::{Finalize, Trace};
+use boa_engine::NativeFunction;
+use boa_engine::Source;
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Trace, Finalize)]
 struct Console;
@@ -10,7 +12,7 @@ impl Console {
     fn args_to_string(args: &[JsValue], context: &mut Context) -> JsResult<String> {
         let stringified_args: Result<Vec<_>, _> = args
             .iter()
-            .map(|x| JsValue::to_string(x, context))
+            .map(|x| JsValue::to_string(x, context).map(|x| x.to_std_string_escaped()))
             .collect();
         let out = stringified_args?.join(" ");
         Ok(out)
@@ -52,17 +54,17 @@ impl Class for Console {
 
     const LENGTH: usize = 0;
 
-    fn constructor(_this: &JsValue, _args: &[JsValue], context: &mut Context) -> JsResult<Self> {
-        Err(context.construct_type_error("console is not a constructor"))
+    fn constructor(_this: &JsValue, _args: &[JsValue], _context: &mut Context) -> JsResult<Self> {
+        Err(JsNativeError::typ().with_message("console is not a constructor").into())
     }
 
     /// This is where the object is initialized.
     fn init(class: &mut ClassBuilder) -> JsResult<()> {
-        class.static_method("info", 12, Self::info);
-        class.static_method("debug", 12, Self::debug);
-        class.static_method("log", 12, Self::log);
-        class.static_method("warn", 12, Self::warn);
-        class.static_method("error", 12, Self::error);
+        class.static_method("info", 12, NativeFunction::from_fn_ptr(Self::info));
+        class.static_method("debug", 12, NativeFunction::from_fn_ptr(Self::debug));
+        class.static_method("log", 12, NativeFunction::from_fn_ptr(Self::log));
+        class.static_method("warn", 12, NativeFunction::from_fn_ptr(Self::warn));
+        class.static_method("error", 12, NativeFunction::from_fn_ptr(Self::error));
 
         Ok(())
     }
@@ -75,17 +77,14 @@ pub fn run(script: &str) -> JsResult<()> {
 
     match inner_run(&mut context, script) {
         Ok(x) => x,
-        Err(e) => {
-            let string_error = JsValue::to_string(&e, &mut context)?;
-            return Err(JsValue::String(string_error));
-        }
+        Err(e) => return Err(e)
     };
 
     Ok(())
 }
 
 fn inner_run(context: &mut Context, script: &str) -> JsResult<()> {
-    context.eval(script)?;
+    context.eval(Source::from_bytes(script.as_bytes()))?;
 
     Ok(())
 }

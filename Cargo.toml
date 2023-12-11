@@ -7,17 +7,16 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0.71"
-boa_engine = "0.16.0"
-boa_gc = "0.16.0"
-deno_core = "*"
-deno_runtime = "0.115.0"
-gc = "0.4.1"
-rusty_jsc = "0.1.0"
+boa_engine = "0.17.0"
+boa_gc = "0.17.0"
+gc = "0.5.0"
+# deno_core = "*"
+# deno_runtime = "0.115.0"
 log = "*"
 mlua = { version = "0.8", features = ["luau", "vendored"] }
 pretty_env_logger = "*"
 rhai = { version = "1.14.0", features = ["serde"] }
-rquickjs = "0.1.7"
+rquickjs = "0.3.1"
 serde_json = "1.0.96"
 # starlark = "0.8.0"
 starlark = { git = "https://github.com/facebookexperimental/starlark-rust", rev = "7614e40fefc7e5c65430634b85aae9a6fb3c7021" }
@@ -26,3 +25,6 @@ tokio = {version = "1", features = ["full"], optional = true}
 [[example]]
 name = "deno"
 required-features = ["tokio"]
+
+[target.'cfg(unix)'.dependencies]
+rusty_jsc = "0.1.0"

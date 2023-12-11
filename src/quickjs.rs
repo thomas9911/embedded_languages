@@ -1,4 +1,5 @@
-use rquickjs::{Context, Func, Object, Runtime};
+use rquickjs::{Context, Object, Runtime};
+use rquickjs::function::Func;
 
 fn value_printer(value: &rquickjs::Value, buffer: &mut String) -> Result<(), rquickjs::Error> {
     let type_ = value.type_of();
